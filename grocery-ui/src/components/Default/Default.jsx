@@ -1,13 +1,13 @@
-import React from 'react'
-import Header from '../Header/Header'
+import React from 'react';
+import Header from '../Header/Header';
 
-const Default = ({children}) => {
-  return (
-    <div>
-      <Header />
-      {children}
-    </div>
-  )
-}
+const Default = ({ children }) => {
+    return (
+        <div>
+            <Header />
+            {children}
+        </div>
+    );
+};
 
-export default Default
+export default Default;
