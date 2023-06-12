@@ -4,10 +4,10 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: #70ffff;
+    background-color: #d1ffff;
 
     .inner {
-        width: var(--default-layout-width);
+        width: 1270px;
         height: 100%;
         display: flex;
         align-items: center;
@@ -86,8 +86,12 @@
             margin-right: 10px;
 
             .access-account {
-                cursor: pointer;
-                text-decoration: underline;
+                font-size: 16px;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
             }
 
             .cart-icon {

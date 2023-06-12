@@ -2,6 +2,8 @@ import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { routes } from './routes';
 import Default from './components/Default/Default';
+import Newsletter from './components/Newsletter/Newsletter';
+import Footer from './components/Footer/Footer';
 
 function App() {
     return (
@@ -25,6 +27,8 @@ function App() {
                         );
                     })}
                 </Routes>
+                <Newsletter />
+                <Footer />
             </Router>
         </div>
     );
