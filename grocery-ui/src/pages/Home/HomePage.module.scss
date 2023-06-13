@@ -8,8 +8,36 @@
         gap: 24px;
         height: 40px;
         text-transform: capitalize;
-        // box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
         border-bottom: 1px solid var(--black);
-        cursor: pointer;
+    }
+
+    .card-product {
+        padding-top: 20px;
+        display: flex;
+        justify-content: center;
+        gap: 15px;
+        flex-wrap: wrap;
+    }
+
+    .btn {
+        display: flex;
+        justify-content: center;
+
+        .btn-xemthem {
+            font-size: 18px;
+            width: 200px;
+            margin-top: 10px;
+            height: 40px;
+            font-weight: 600;
+            background-color: transparent;
+            border: 1px solid blue;
+            border-radius: 6px;
+
+            &:hover {
+                cursor: pointer;
+                background-color: blue;
+                color: var(--white);
+            }
+        }
     }
 }

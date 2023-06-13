@@ -1,0 +1,137 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 686px;
+    background: url('../../assets/images/color.jpg');
+    background-size: cover;
+    background-position: center;
+    animation: animateBackground 5s linear infinite;
+
+    // CSS Login -----------------------------------
+    .login-box {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        backdrop-filter: blur(15px);
+        width: 360px;
+        min-height: 30px;
+        position: relative;
+        border: 2px solid white;
+        border-radius: 20px;
+        padding: 20px 0;
+
+        h2 {
+            color: white;
+            text-align: center;
+            text-transform: capitalize;
+            font-size: 25px;
+            margin-bottom: 10px;
+        }
+
+        .input-box {
+            position: relative;
+            width: 310px;
+            margin: 25px 0;
+            border-bottom: 2px solid #fff;
+
+            span {
+                color: white;
+            }
+
+            label {
+                position: absolute;
+                top: 50%;
+                left: 5px;
+                transform: translateY(-50%);
+                font-size: 15px;
+                color: #fff;
+                pointer-events: none;
+                transition: 0.5s; // khi click vaò input sẽ có hiệu ứng chậm
+            }
+
+            input:focus ~ label,
+            input:valid ~ label {
+                top: -5px;
+            }
+            input {
+                width: 100%;
+                height: 50px;
+                background: transparent;
+                font-size: 14px;
+                color: #fff;
+                padding: 0 35px 0 5px;
+            }
+
+            .icon {
+                position: absolute;
+                right: 8px;
+                color: #fff;
+                font-size: 20px;
+                line-height: 42px;
+            }
+        }
+
+        .remember-forgot {
+            display: flex;
+            justify-content: space-between;
+            margin: -15px 0 25px;
+            font-size: 14px;
+            color: #fff;
+
+            label {
+                display: flex;
+                align-items: center;
+
+                input {
+                    cursor: pointer;
+                    margin-right: 5px;
+                }
+            }
+            p:hover {
+                cursor: pointer;
+                text-decoration: underline;
+            }
+        }
+
+        button {
+            width: 100%;
+            height: 35px;
+            background-color: #fff;
+            border-radius: 40px;
+            font-weight: 600;
+            font-size: 16px;
+            text-transform: capitalize;
+
+            &:hover {
+                cursor: pointer;
+                background-color: blue;
+                color: #fff;
+            }
+        }
+
+        .link {
+            font-size: 14px;
+            color: #fff;
+            margin-top: 10px;
+            display: flex;
+            justify-content: center;
+
+            p {
+                margin-left: 5px;
+                text-transform: capitalize;
+
+                &:hover {
+                    cursor: pointer;
+                    text-decoration: underline;
+                }
+            }
+        }
+    }
+}
+
+@keyframes animateBackground {
+    100% {
+        filter: hue-rotate(360deg);
+    }
+}

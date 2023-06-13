@@ -1,0 +1,41 @@
+.product-cart {
+    box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12);
+    width: 230px;
+    background-color: var(--white);
+    cursor: pointer;
+
+    .thumbnail {
+        background-color: rgba(0, 0, 0, 0.05);
+        height: 248px;
+
+        img {
+            width: 100%;
+            transition: all ease 0.3s;
+            height: 100%;
+            object-fit: fill;
+        }
+
+        &:hover {
+            img {
+                transform: scale(0.9);
+            }
+        }
+    }
+
+    .prop-detail {
+        padding: 10px 10px;
+
+        .name {
+            font-size: 16px;
+            display: block;
+            text-transform: capitalize;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            overflow: hidden;
+        }
+        .price {
+            font-size: 15px;
+            color: red;
+        }
+    }
+}

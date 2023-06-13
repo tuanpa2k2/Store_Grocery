@@ -1,0 +1,12 @@
+.wrapper {
+    text-transform: uppercase;
+    color: var(--text-color);
+    font-size: 16px;
+    font-weight: 500;
+
+    &:hover {
+        cursor: pointer;
+        color: blue;
+        text-decoration: underline;
+    }
+}

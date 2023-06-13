@@ -98,6 +98,11 @@
                 position: relative;
                 display: flex;
                 font-size: 18px;
+                cursor: pointer;
+
+                svg {
+                    font-size: 20px;
+                }
 
                 span {
                     position: absolute;
@@ -119,5 +124,20 @@
                 cursor: pointer;
             }
         }
+    }
+
+    &.sticky-header {
+        position: sticky;
+        top: 0;
+        // animation: stickyHeader 0.5s ease forwards;
+    }
+}
+
+@keyframes stickyHeader {
+    0% {
+        transform: translateY(-80px);
+    }
+    100% {
+        transform: translateY(0px);
     }
 }
