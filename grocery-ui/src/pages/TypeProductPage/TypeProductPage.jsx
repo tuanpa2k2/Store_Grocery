@@ -4,10 +4,13 @@ import Card from '~/components/Card/Card';
 
 import classNames from 'classnames/bind';
 import styles from './TypeProductPage.module.scss';
+import { useNavigate } from 'react-router-dom';
 
 const cx = classNames.bind(styles);
 
 const TypeProductPage = () => {
+    const navigate = useNavigate();
+
     return (
         <>
             <div className={cx('wrapper')}>
@@ -23,14 +26,14 @@ const TypeProductPage = () => {
                     <Card />
                     <Card />
                     <div className={cx('pagination')}>
-                        <a href="#">&laquo;</a>
-                        <a href="#">1</a>
-                        <a href="#">2</a>
-                        <a href="#">...</a>
-                        <a href="#">4</a>
-                        <a href="#">5</a>
-                        <a href="#">6</a>
-                        <a href="#">&raquo;</a>
+                        <p onClick={() => navigate('#')}>&laquo;</p>
+                        <p onClick={() => navigate('/')}>1</p>
+                        <p onClick={() => navigate('#')}>2</p>
+                        <p onClick={() => navigate('#')}>...</p>
+                        <p onClick={() => navigate('#')}>4</p>
+                        <p onClick={() => navigate('#')}>5</p>
+                        <p onClick={() => navigate('#')}>6</p>
+                        <p onClick={() => navigate('#')}>&raquo;</p>
                     </div>
                 </div>
             </div>

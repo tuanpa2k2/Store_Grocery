@@ -19,7 +19,7 @@ const SliderComponent = ({ arrImages }) => {
 
     return (
         <div className={cx('wrapper-slider')}>
-            <Slider {...settings}>
+            <Slider className={cx('slider')} {...settings}>
                 {arrImages.map((img) => {
                     return <img key={img} src={img} alt="slider" />;
                 })}

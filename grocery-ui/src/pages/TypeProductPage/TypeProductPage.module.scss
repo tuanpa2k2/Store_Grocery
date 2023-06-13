@@ -1,5 +1,5 @@
 .wrapper {
-    padding: 15px 130px 0 130px;
+    padding: 15px 130px;
     display: flex;
     min-height: 350px;
     background-color: #f0f0f0;
@@ -14,30 +14,33 @@
 
     .column-right {
         width: 82%;
-        padding: 0px 15px;
+        // padding: 0px 15px;
+        padding-left: 15px;
         border-top-right-radius: 10px;
         border-bottom-right-radius: 10px;
         display: flex;
         justify-content: center;
         flex-wrap: wrap;
         gap: 15px;
+        background-color: #fff;
     }
 }
 .pagination {
     display: flex;
-    justify-content: center;
-    align-items: center;
     gap: 15px;
     padding-bottom: 10px;
 
-    a {
+    p {
         display: flex;
         justify-content: center;
+        align-items: center;
         width: 36px;
+        height: 34px;
         border: 1px solid blue;
         border-radius: 50%;
 
         &:hover {
+            cursor: pointer;
             background-color: blue;
             color: white;
         }

@@ -5,7 +5,6 @@ import Card from '~/components/Card/Card';
 import slider1 from '~/assets/images/slide1.jpg';
 import slider2 from '~/assets/images/slide2.jpg';
 import slider3 from '~/assets/images/slide3.jpg';
-// import NavbarLeft from '~/components/NavbarLeft/NavbarLeft';
 
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
@@ -23,6 +22,7 @@ const HomePage = () => {
                 })}
             </div>
             <SliderComponent arrImages={[slider1, slider2, slider3]} />
+            <div className={cx('heading-text')}>all products</div>
             <div className={cx('card-product')}>
                 <Card />
                 <Card />
@@ -35,7 +35,6 @@ const HomePage = () => {
             <div className={cx('btn')}>
                 <button className={cx('btn-xemthem')}>Xem Thêm</button>
             </div>
-            {/* <NavbarLeft /> */}
         </div>
     );
 };

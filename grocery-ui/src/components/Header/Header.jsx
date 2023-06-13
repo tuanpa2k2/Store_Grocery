@@ -25,9 +25,9 @@ const Header = () => {
     }, []);
 
     return (
-        <header className={cx(`wrapper`)}>
+        <header className={cx('wrapper')}>
             <div className={cx('inner')}>
-                <div className={cx('left')} onClick={() => navigate('/login')}>
+                <div className={cx('left')} onClick={() => navigate('/')}>
                     grocery shop
                 </div>
                 <div className={cx('center')}>
