@@ -116,15 +116,23 @@ const deleteProduct = (id) => {
   });
 };
 
-const getAllProduct = () => {
+const getAllProduct = (limit = 12, page = 0) => {
   return new Promise(async (resolve, reject) => {
     try {
-      const allProduct = await Product.find();
+      // .limit(4) : lấy ra 4 sản phẩm đầu tiên
+      // .skip(3) : nó sẽ bỏ qua 3 sản phẩm đầu tiên và lấy từ sản phẩm thứ 4 cho đến hết
+      const allProduct = await Product.find()
+        .limit(limit)
+        .skip(page * limit);
+      const totalProduct = await Product.count();
 
       resolve({
         status: "OK",
         message: "Get all product success...",
         data: allProduct,
+        totalProduct: totalProduct,
+        totalPage: Math.ceil(totalProduct / limit),
+        pageCurrent: Number(page + 1),
       });
     } catch (e) {
       reject(e);
