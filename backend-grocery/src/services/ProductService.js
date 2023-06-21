@@ -116,15 +116,53 @@ const deleteProduct = (id) => {
   });
 };
 
-const getAllProduct = (limit = 12, page = 0) => {
+const getAllProduct = (limit, page, sort, filter) => {
   return new Promise(async (resolve, reject) => {
     try {
-      // .limit(4) : lấy ra 4 sản phẩm đầu tiên
-      // .skip(3) : nó sẽ bỏ qua 3 sản phẩm đầu tiên và lấy từ sản phẩm thứ 4 cho đến hết
-      const allProduct = await Product.find()
-        .limit(limit)
-        .skip(page * limit);
       const totalProduct = await Product.count();
+      console.log("filter", filter);
+
+      if (filter) {
+        const label = filter[0];
+
+        const allProductSort = await Product.find({
+          [label]: { $regex: filter[1] },
+        })
+          .limit(limit) // .limit(4) : lấy ra 4 sản phẩm đầu tiên
+          .skip(page * limit); // .skip(3) : nó sẽ bỏ qua 3 sản phẩm đầu tiên và lấy từ sản phẩm thứ 4 cho đến hết
+
+        resolve({
+          status: "OK",
+          message: "Get filter all product success...",
+          data: allProductSort,
+          totalProduct: totalProduct,
+          totalPage: Math.ceil(totalProduct / limit),
+          pageCurrent: Number(page + 1),
+        });
+      }
+
+      if (sort) {
+        const objectSort = {};
+        objectSort[sort[1]] = sort[0];
+
+        const allProductSort = await Product.find()
+          .limit(limit)
+          .skip(page * limit)
+          .sort(objectSort);
+
+        resolve({
+          status: "OK",
+          message: "Get sort all product success...",
+          data: allProductSort,
+          totalProduct: totalProduct,
+          totalPage: Math.ceil(totalProduct / limit),
+          pageCurrent: Number(page + 1),
+        });
+      }
+
+      const allProduct = await Product.find()
+        .limit(limit) // .limit(4) : lấy ra 4 sản phẩm đầu tiên
+        .skip(page * limit); // .skip(3) : nó sẽ bỏ qua 3 sản phẩm đầu tiên và lấy từ sản phẩm thứ 4 cho đến hết
 
       resolve({
         status: "OK",

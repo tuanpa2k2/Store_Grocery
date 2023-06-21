@@ -86,10 +86,12 @@ const deleteProduct = async (req, res) => {
 
 const getAllProduct = async (req, res) => {
   try {
-    const { limit, page } = req.query;
+    const { limit, page, sort, filter } = req.query;
     const respononse = await ProductService.getAllProduct(
-      Number(limit),
-      Number(page)
+      Number(limit) || 6, // nếu không có truyền limit thì get-all lấy 6 sản phẩm
+      Number(page) || 0,
+      sort,
+      filter
     );
 
     return res.status(200).json(respononse);
