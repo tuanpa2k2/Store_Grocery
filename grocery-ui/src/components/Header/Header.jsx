@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+// import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faCartShopping, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
@@ -9,20 +9,20 @@ import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
 
 const Header = () => {
-    const [scrolled, setScrolled] = useState(false);
-    console.log(scrolled);
+    // const [scrolled, setScrolled] = useState(false);
+    // console.log(scrolled);
     const navigate = useNavigate();
 
-    const handleScrolled = () => {
-        const offset = window.scrollY;
-        if (offset > 200) {
-            setScrolled(true);
-        } else setScrolled(false);
-    };
+    // const handleScrolled = () => {
+    //     const offset = window.scrollY;
+    //     if (offset > 200) {
+    //         setScrolled(true);
+    //     } else setScrolled(false);
+    // };
 
-    useEffect(() => {
-        window.addEventListener('scroll', handleScrolled);
-    }, []);
+    // useEffect(() => {
+    //     window.addEventListener('scroll', handleScrolled);
+    // }, []);
 
     return (
         <header className={cx('wrapper')}>
