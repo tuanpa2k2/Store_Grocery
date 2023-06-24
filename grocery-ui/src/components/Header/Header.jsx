@@ -12,6 +12,9 @@ const Header = () => {
     // const [scrolled, setScrolled] = useState(false);
     // console.log(scrolled);
     const navigate = useNavigate();
+    const handleNavigateLogin = () => {
+        navigate('/login');
+    };
 
     // const handleScrolled = () => {
     //     const offset = window.scrollY;
@@ -42,7 +45,7 @@ const Header = () => {
                         <FontAwesomeIcon icon={faCartShopping} />
                         <span>5</span>
                     </div>
-                    <div className={cx('more-btn')}>
+                    <div onClick={handleNavigateLogin} className={cx('more-btn')}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </div>
                 </div>

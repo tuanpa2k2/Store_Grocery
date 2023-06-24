@@ -54,6 +54,7 @@
             input:valid ~ label {
                 top: -5px;
             }
+
             input {
                 width: 100%;
                 height: 50px;
@@ -65,10 +66,16 @@
 
             .icon {
                 position: absolute;
-                right: 8px;
+                right: 0px;
+                padding-top: 5px;
                 color: #fff;
                 font-size: 20px;
                 line-height: 42px;
+
+                &:hover {
+                    cursor: pointer;
+                    color: red;
+                }
             }
         }
 
@@ -102,12 +109,13 @@
             font-weight: 600;
             font-size: 16px;
             text-transform: capitalize;
+            cursor: pointer;
 
-            &:hover {
-                cursor: pointer;
-                background-color: blue;
-                color: #fff;
-            }
+            // &:hover {
+            //     cursor: pointer;
+            //     background-color: blue;
+            //     color: #fff;
+            // }
         }
 
         .link {

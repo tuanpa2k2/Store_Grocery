@@ -2,9 +2,9 @@ import React from 'react';
 import TypeProduct from '~/components/TypeProduct/TypeProduct';
 import SliderComponent from '~/components/Slider/SliderComponent';
 import Card from '~/components/Card/Card';
-import slider1 from '~/assets/images/slide1.jpg';
-import slider2 from '~/assets/images/slide2.jpg';
-import slider3 from '~/assets/images/slide3.jpg';
+import bannerSlide1 from '~/assets/images/bannerSlide1.jpg';
+import bannerSlide2 from '~/assets/images/bannerSlide2.jpg';
+import bannerSlide3 from '~/assets/images/bannerSlide3.jpg';
 
 import classNames from 'classnames/bind';
 import styles from './HomePage.module.scss';
@@ -21,7 +21,7 @@ const HomePage = () => {
                     return <TypeProduct key={item} name={item} />;
                 })}
             </div>
-            <SliderComponent arrImages={[slider1, slider2, slider3]} />
+            <SliderComponent arrImages={[bannerSlide1, bannerSlide2, bannerSlide3]} />
             <div className={cx('heading-text')}>all products</div>
             <div className={cx('card-product')}>
                 <Card />

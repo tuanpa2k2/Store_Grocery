@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
@@ -10,6 +10,22 @@ const cx = classNames.bind(styles);
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+
+    const handleOnchangeEmail = (e) => {
+        const emailed = e.target.value;
+        setEmail(emailed);
+    };
+    const handleOnchangePassword = (e) => {
+        const passworded = e.target.value;
+        setPassword(passworded);
+    };
+
+    const handleLogin = () => {
+        console.log('handleLogin', email, password);
+    };
+
     return (
         <div className={cx('wrapper')}>
             <section>
@@ -20,14 +36,14 @@ const SignIn = () => {
                             <span className={cx('icon')}>
                                 <FontAwesomeIcon icon={faEnvelope} />
                             </span>
-                            <input type="email" required />
+                            <input value={email} type="email" onChange={handleOnchangeEmail} required />
                             <label>Email</label>
                         </div>
                         <div className={cx('input-box')}>
                             <span className={cx('icon')}>
                                 <FontAwesomeIcon icon={faLock} />
                             </span>
-                            <input name="password" type="password" required />
+                            <input value={password} type="password" onChange={handleOnchangePassword} required />
                             <label htmlFor="">Password</label>
                         </div>
                         <div className={cx('remember-forgot')}>
@@ -35,10 +51,11 @@ const SignIn = () => {
                                 <input type="checkbox" />
                                 Remember me
                             </label>
-                            {/* <a href="#">Forgot password?</a> */}
                             <p onClick={() => navigate('/forgot-password')}>Forgot password?</p>
                         </div>
-                        <button>Login</button>
+                        <button onClick={handleLogin} disabled={!email.length || !password.length}>
+                            Login
+                        </button>
                         <div className={cx('link')}>
                             <span>Don't you have an account?</span>
                             <p onClick={() => navigate('/register')}>Register Now</p>

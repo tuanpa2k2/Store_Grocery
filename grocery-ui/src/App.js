@@ -1,7 +1,7 @@
-import axios from 'axios';
+// import axios from 'axios';
 import React, { Fragment } from 'react';
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+// import { useQuery } from '@tanstack/react-query';
 
 import { routes } from './routes';
 import Default from './components/Default/Default';
@@ -10,17 +10,13 @@ import Footer from './components/Footer/Footer';
 import AppContext from './untils/context';
 
 function App() {
-    // useEffect(() => {
-    //     fetchApi();
-    // }, []);
+    // const fetchApi = async () => {
+    //     const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all`);
+    //     return res.data;
+    // };
 
-    const fetchApi = async () => {
-        const res = await axios.get(`${process.env.REACT_APP_API_URL}/product/get-all`);
-        return res.data;
-    };
-
-    const query = useQuery({ queryKey: ['todos'], queryFn: fetchApi });
-    console.log('query', query);
+    // const query = useQuery({ queryKey: ['todos'], queryFn: fetchApi });
+    // console.log('query', query);
 
     return (
         <div>
