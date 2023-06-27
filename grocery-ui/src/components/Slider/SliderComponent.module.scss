@@ -9,17 +9,4 @@
         background-repeat: no-repeat;
         background-size: cover;
     }
-
-    .slick-prev {
-        z-index: 10;
-        left: 12px;
-        background-color: red;
-        /* left: -24px; */
-        top: 50%;
-
-        &::before {
-            font-size: 40px;
-            color: #fff;
-        }
-    }
 }

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import { faEnvelope, faLock } from '@fortawesome/free-solid-svg-icons';
+import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import classNames from 'classnames/bind';
@@ -15,6 +15,9 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
+    const [passwordType, setPasswordType] = useState('password');
+    const [confirmPasswordType, setconfirmPasswordType] = useState('password');
+    const [passwordTypeIcon, setPasswordTypeIcon] = useState(faLock);
 
     const handleOnchangeEmail = (e) => {
         const emailed = e.target.value;
@@ -29,7 +32,16 @@ const SignUp = () => {
         setConfirmPassword(confirmPassworded);
     };
 
-    console.log('SignUp: ', email, password, confirmPassword);
+    const handleOnChangeIcon = () => {
+        if (passwordType === 'password' || confirmPasswordType === 'password') {
+            setPasswordType('text');
+            setconfirmPasswordType('text');
+            setPasswordTypeIcon(faUnlock);
+        } else {
+            setPasswordType('password');
+            setPasswordTypeIcon(faLock);
+        }
+    };
 
     const handleSignUp = () => {
         console.log('SignUp: ', email, password, confirmPassword);
@@ -37,55 +49,52 @@ const SignUp = () => {
 
     return (
         <div className={cx('wrapper')}>
-            <section>
-                <div className={cx('login-box')}>
-                    <form action="">
-                        <h2>register account</h2>
-                        <div className={cx('input-box')}>
-                            <span className={cx('icon')}>
-                                <FontAwesomeIcon icon={faEnvelope} />
-                            </span>
-                            <input type="email" required value={email} onChange={handleOnchangeEmail} />
-                            <label>Email</label>
-                        </div>
-                        <div className={cx('input-box')}>
-                            <span className={cx('icon')}>
-                                <FontAwesomeIcon icon={faLock} />
-                            </span>
-                            <input type="password" onChange={handleOnchangePassword} value={password} required />
-                            <label htmlFor="">Password</label>
-                        </div>
-                        <div className={cx('input-box')}>
-                            <span className={cx('icon')}>
-                                <FontAwesomeIcon icon={faLock} />
-                            </span>
-                            <input
-                                type="password"
-                                onChange={handleOnchangeConfirmPassword}
-                                value={confirmPassword}
-                                id="password"
-                                required
-                            />
-                            <label htmlFor="">Confirm password</label>
-                        </div>
-                        <div className={cx('remember-forgot')}>
-                            <label>
-                                <input type="checkbox" />I accept all privacy account terms
-                            </label>
-                        </div>
-                        <button
-                            onClick={handleSignUp}
-                            disabled={!email.length || !password.length || !confirmPassword.length}
-                        >
-                            Register now
-                        </button>
-                        <div className={cx('link')}>
-                            <span>You have an account?</span>
-                            <p onClick={() => navigate('/login')}>login now</p>
-                        </div>
-                    </form>
-                </div>
-            </section>
+            <div className={cx('box-auth')}>
+                <form action="">
+                    <h2>Login Account</h2>
+                    <div className={cx('input-box')}>
+                        <span className={cx('icon')}>
+                            <FontAwesomeIcon icon={faEnvelope} />
+                        </span>
+                        <input value={email} type="email" onChange={handleOnchangeEmail} />
+                        <label>Email</label>
+                    </div>
+                    <div className={cx('input-box')}>
+                        <span className={cx('icon')} onClick={handleOnChangeIcon}>
+                            <FontAwesomeIcon icon={passwordTypeIcon} />
+                        </span>
+                        <input type={passwordType} value={password} onChange={handleOnchangePassword} />
+                        <label htmlFor="">Password</label>
+                    </div>
+                    <div className={cx('input-box')}>
+                        <span className={cx('icon')} onClick={handleOnChangeIcon}>
+                            <FontAwesomeIcon icon={passwordTypeIcon} />
+                        </span>
+                        <input
+                            type={confirmPasswordType}
+                            value={confirmPassword}
+                            onChange={handleOnchangeConfirmPassword}
+                        />
+                        <label htmlFor="">Confirm Password</label>
+                    </div>
+                    <div className={cx('remember-forgot')}>
+                        <label>
+                            <input type="checkbox" />I accept all privacy account terms
+                        </label>
+                    </div>
+                    <div
+                        className={cx('btn-submit')}
+                        onClick={handleSignUp}
+                        disabled={!email.length || !password.length || confirmPassword.length}
+                    >
+                        Register
+                    </div>
+                    <div className={cx('link')}>
+                        <span>You have an account?</span>
+                        <p onClick={() => navigate('/login')}>login now</p>
+                    </div>
+                </form>
+            </div>
         </div>
     );
 };

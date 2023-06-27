@@ -12,9 +12,6 @@ const Header = () => {
     // const [scrolled, setScrolled] = useState(false);
     // console.log(scrolled);
     const navigate = useNavigate();
-    const handleNavigateLogin = () => {
-        navigate('/login');
-    };
 
     // const handleScrolled = () => {
     //     const offset = window.scrollY;
@@ -35,17 +32,19 @@ const Header = () => {
                 </div>
                 <div className={cx('center')}>
                     <input placeholder="Search products..." spellCheck={false} />
-                    <button className={cx('btn-search')}>
+                    <button className={cx('btnSearch')}>
                         <FontAwesomeIcon icon={faMagnifyingGlass} />
                     </button>
                 </div>
                 <div className={cx('right')}>
-                    <div className={cx('access-account')}>tuanpa2k2@gmail.com</div>
+                    <div className={cx('access-account')} onClick={() => navigate('/login')}>
+                        tuanpa2k2@gmail.com
+                    </div>
                     <div className={cx('cart-icon')}>
                         <FontAwesomeIcon icon={faCartShopping} />
                         <span>5</span>
                     </div>
-                    <div onClick={handleNavigateLogin} className={cx('more-btn')}>
+                    <div className={cx('more-btn')}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </div>
                 </div>
