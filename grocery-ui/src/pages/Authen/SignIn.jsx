@@ -12,18 +12,7 @@ const SignIn = () => {
     const navigate = useNavigate();
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
-    const [passwordType, setPasswordType] = useState('password');
-    const [passwordTypeIcon, setPasswordTypeIcon] = useState(faLock);
-
-    const handleOnChangeIcon = () => {
-        if (passwordType === 'password') {
-            setPasswordType('text');
-            setPasswordTypeIcon(faUnlock);
-        } else {
-            setPasswordType('password');
-            setPasswordTypeIcon(faLock);
-        }
-    };
+    const [isShowPassword, setIsShowPassword] = useState(false);
 
     const handleOnchangeEmail = (e) => {
         const email = e.target.value;
@@ -35,7 +24,7 @@ const SignIn = () => {
     };
 
     const handleLogin = () => {
-        console.log('handleLogin: ', email, password);
+        console.log('handleLogin:', email, password);
     };
 
     return (
@@ -47,23 +36,18 @@ const SignIn = () => {
                         <span className={cx('icon')}>
                             <FontAwesomeIcon icon={faEnvelope} />
                         </span>
-                        <input
-                            value={email}
-                            type="email"
-                            onChange={handleOnchangeEmail}
-                            placeholder="enter your email..."
-                        />
+                        <input value={email} type="email" onChange={handleOnchangeEmail} placeholder="..." />
                         <label>Email</label>
                     </div>
                     <div className={cx('input-box')}>
-                        <span className={cx('icon')} onClick={handleOnChangeIcon}>
-                            <FontAwesomeIcon icon={passwordTypeIcon} />
+                        <span className={cx('icon')} onClick={() => setIsShowPassword(!isShowPassword)}>
+                            <FontAwesomeIcon icon={isShowPassword ? faUnlock : faLock} />
                         </span>
                         <input
-                            type={passwordType}
+                            type={isShowPassword ? 'text' : 'password'}
                             value={password}
                             onChange={handleOnchangePassword}
-                            placeholder="enter your password..."
+                            placeholder="..."
                         />
                         <label htmlFor="">Password</label>
                     </div>

@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import classNames from 'classnames/bind';
 import styles from './Authen.module.scss';
 
@@ -15,9 +14,8 @@ const SignUp = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
-    const [passwordType, setPasswordType] = useState('password');
-    const [confirmPasswordType, setconfirmPasswordType] = useState('password');
-    const [passwordTypeIcon, setPasswordTypeIcon] = useState(faLock);
+    const [isShowPassword, setIsShowPassword] = useState(false);
+    const [isShowconfirmPassword, setisShowconfirmPassword] = useState(false);
 
     const handleOnchangeEmail = (e) => {
         const emailed = e.target.value;
@@ -30,17 +28,6 @@ const SignUp = () => {
     const handleOnchangeConfirmPassword = (e) => {
         const confirmPassworded = e.target.value;
         setConfirmPassword(confirmPassworded);
-    };
-
-    const handleOnChangeIcon = () => {
-        if (passwordType === 'password' || confirmPasswordType === 'password') {
-            setPasswordType('text');
-            setconfirmPasswordType('text');
-            setPasswordTypeIcon(faUnlock);
-        } else {
-            setPasswordType('password');
-            setPasswordTypeIcon(faLock);
-        }
     };
 
     const handleSignUp = () => {
@@ -56,22 +43,28 @@ const SignUp = () => {
                         <span className={cx('icon')}>
                             <FontAwesomeIcon icon={faEnvelope} />
                         </span>
-                        <input value={email} type="email" onChange={handleOnchangeEmail} />
+                        <input placeholder="..." value={email} type="email" onChange={handleOnchangeEmail} />
                         <label>Email</label>
                     </div>
                     <div className={cx('input-box')}>
-                        <span className={cx('icon')} onClick={handleOnChangeIcon}>
-                            <FontAwesomeIcon icon={passwordTypeIcon} />
+                        <span className={cx('icon')} onClick={() => setIsShowPassword(!isShowPassword)}>
+                            <FontAwesomeIcon icon={isShowPassword ? faUnlock : faLock} />
                         </span>
-                        <input type={passwordType} value={password} onChange={handleOnchangePassword} />
+                        <input
+                            placeholder="..."
+                            type={isShowPassword ? 'text' : 'password'}
+                            value={password}
+                            onChange={handleOnchangePassword}
+                        />
                         <label htmlFor="">Password</label>
                     </div>
                     <div className={cx('input-box')}>
-                        <span className={cx('icon')} onClick={handleOnChangeIcon}>
-                            <FontAwesomeIcon icon={passwordTypeIcon} />
+                        <span className={cx('icon')} onClick={() => setisShowconfirmPassword(!isShowconfirmPassword)}>
+                            <FontAwesomeIcon icon={isShowconfirmPassword ? faUnlock : faLock} />
                         </span>
                         <input
-                            type={confirmPasswordType}
+                            placeholder="..."
+                            type={isShowconfirmPassword ? 'text' : 'password'}
                             value={confirmPassword}
                             onChange={handleOnchangeConfirmPassword}
                         />
@@ -83,7 +76,7 @@ const SignUp = () => {
                         </label>
                     </div>
                     <div
-                        className={cx('btn-submit')}
+                        className={cx(`btn-submit`)}
                         onClick={handleSignUp}
                         disabled={!email.length || !password.length || confirmPassword.length}
                     >

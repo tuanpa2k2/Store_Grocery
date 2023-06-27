@@ -3,7 +3,9 @@
     justify-content: center;
     align-items: center;
     height: 752px;
-    background-color: #474747;
+    background: url('../../assets/images/abc.jpg');
+    background-size: cover;
+    background-position: center;
 
     // CSS Login -----------------------------------
     .box-auth {
@@ -14,12 +16,12 @@
         width: 360px;
         min-height: 30px;
         position: relative;
-        border: 2px solid white;
+        border: 2px solid rgb(255, 0, 0);
         border-radius: 20px;
         padding: 20px 0;
+        color: black;
 
         h2 {
-            color: white;
             text-align: center;
             text-transform: capitalize;
             font-size: 25px;
@@ -30,18 +32,13 @@
             position: relative;
             width: 310px;
             margin: 25px 0;
-            border-bottom: 2px solid #fff;
-
-            span {
-                color: white;
-            }
+            border-bottom: 1px solid #000000;
 
             label {
                 position: absolute;
                 left: 0;
                 transform: translateY(-50%);
                 font-size: 15px;
-                color: #fff;
                 pointer-events: none;
                 transition: 0.5s; // khi click vaò input sẽ có hiệu ứng chậm
             }
@@ -51,15 +48,13 @@
                 height: 60px;
                 background: transparent;
                 font-size: 14px;
-                color: #fff;
-                margin: 0px -35px -8px 5px;
+                margin: 0px -35px -8px 0px;
             }
 
             .icon {
                 position: absolute;
                 right: 0px;
                 padding-top: 5px;
-                color: #fff;
                 font-size: 20px;
                 line-height: 42px;
 
@@ -74,7 +69,6 @@
             justify-content: space-between;
             margin: -15px 0 25px;
             font-size: 14px;
-            color: #fff;
 
             label {
                 display: flex;
@@ -97,7 +91,8 @@
             justify-content: center;
             width: 100%;
             height: 35px;
-            background-color: #fff;
+            background-color: #df2323;
+            color: #fff;
             border-radius: 40px;
             font-weight: 600;
             font-size: 16px;
@@ -105,9 +100,13 @@
             cursor: pointer;
         }
 
+        .btn-disable {
+            background-color: #606060;
+            pointer-events: none;
+        }
+
         .link {
             font-size: 14px;
-            color: #fff;
             margin-top: 10px;
             display: flex;
             justify-content: center;
