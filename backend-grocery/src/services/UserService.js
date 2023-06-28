@@ -4,7 +4,7 @@ const { genneralAccessToken, genneralRefreshToken } = require("./jwtService");
 
 const createUser = (newUser) => {
   return new Promise(async (resolve, reject) => {
-    const { name, email, password, confirmPassword, phone } = newUser;
+    const { email, password, confirmPassword } = newUser;
 
     try {
       // Tìm user có email đã tông tại hay chưa
@@ -13,7 +13,7 @@ const createUser = (newUser) => {
       });
       if (checkUser !== null) {
         resolve({
-          status: "OK",
+          status: "Error",
           message: "Email đã tồn tại!",
         });
       }
@@ -23,15 +23,14 @@ const createUser = (newUser) => {
 
       // Tạo user
       const createdUser = await User.create({
-        name,
         email,
         password: hash,
-        phone,
       });
+
       if (createdUser) {
         resolve({
           status: "OK",
-          message: "Success",
+          message: "Create user success",
           data: createdUser,
         });
       }
@@ -43,7 +42,7 @@ const createUser = (newUser) => {
 
 const loginUser = (userLogin) => {
   return new Promise(async (resolve, reject) => {
-    const { name, email, password, confirmPassword, phone } = userLogin;
+    const { email, password } = userLogin;
 
     try {
       // Tìm user có email đã tông tại hay chưa
@@ -53,8 +52,8 @@ const loginUser = (userLogin) => {
       if (checkUser === null) {
         // nếu không tồn tại email trong db
         resolve({
-          status: "OK",
-          message: "Email không tồn tại! Vui lòng kiểm tra lại.",
+          status: "Error-email",
+          message: "Email không tồn tại!",
         });
       }
 
@@ -62,8 +61,8 @@ const loginUser = (userLogin) => {
       const comparePassword = bcrypt.compareSync(password, checkUser.password);
       if (!comparePassword) {
         resolve({
-          status: "OK",
-          message: "Email or Password is incorrect",
+          status: "Error-password",
+          message: "Pasword không đúng!",
         });
       }
 
@@ -91,7 +90,6 @@ const loginUser = (userLogin) => {
 
 const updateUser = (id, data) => {
   return new Promise(async (resolve, reject) => {
-
     try {
       const checkUserId = await User.findOne({
         _id: id,
@@ -104,12 +102,12 @@ const updateUser = (id, data) => {
         });
       }
 
-      const updatedUser = await User.findByIdAndUpdate(id, data, { new: true })
+      const updatedUser = await User.findByIdAndUpdate(id, data, { new: true });
 
       resolve({
         status: "OK",
         message: "Update success...",
-        data: updatedUser
+        data: updatedUser,
       });
     } catch (e) {
       reject(e);
@@ -119,7 +117,6 @@ const updateUser = (id, data) => {
 
 const deleteUser = (id) => {
   return new Promise(async (resolve, reject) => {
-
     try {
       const checkUserId = await User.findOne({
         _id: id,
@@ -132,7 +129,7 @@ const deleteUser = (id) => {
         });
       }
 
-      await User.findByIdAndDelete(id)
+      await User.findByIdAndDelete(id);
 
       resolve({
         status: "OK",
@@ -146,14 +143,13 @@ const deleteUser = (id) => {
 
 const getAllUser = () => {
   return new Promise(async (resolve, reject) => {
-
     try {
-      const allUser = await User.find()
+      const allUser = await User.find();
 
       resolve({
         status: "OK",
         message: "All user success...",
-        data: allUser
+        data: allUser,
       });
     } catch (e) {
       reject(e);
@@ -163,7 +159,6 @@ const getAllUser = () => {
 
 const getDetailsUser = (id) => {
   return new Promise(async (resolve, reject) => {
-
     try {
       const user = await User.findOne({
         _id: id,
@@ -179,7 +174,7 @@ const getDetailsUser = (id) => {
       resolve({
         status: "OK",
         message: "Get details user success...",
-        data: user
+        data: user,
       });
     } catch (e) {
       reject(e);
@@ -190,7 +185,7 @@ const getDetailsUser = (id) => {
 module.exports = {
   createUser,
   loginUser,
-  updateUser, 
+  updateUser,
   deleteUser,
   getAllUser,
   getDetailsUser,

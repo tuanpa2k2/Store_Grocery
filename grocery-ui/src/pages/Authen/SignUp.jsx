@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+
+import { useMutationHooks } from '~/hooks/useMutationHook';
+import * as UserService from '~/services/UserService';
+
 import classNames from 'classnames/bind';
 import styles from './Authen.module.scss';
 
@@ -11,11 +15,16 @@ const SignUp = () => {
     const navigate = useNavigate();
 
     // handle email, password, confirmPassword --------------------------------------------------
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [confirmPassword, setConfirmPassword] = useState('');
     const [isShowPassword, setIsShowPassword] = useState(false);
     const [isShowconfirmPassword, setisShowconfirmPassword] = useState(false);
+
+    const mutation = useMutationHooks((data) => UserService.createUser(data));
+    const { data } = mutation;
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const handleOnchangeEmail = (e) => {
         const emailed = e.target.value;
@@ -30,21 +39,32 @@ const SignUp = () => {
         setConfirmPassword(confirmPassworded);
     };
 
-    const handleSignUp = () => {
-        console.log('SignUp: ', email, password, confirmPassword);
+    const handleSignUp = async () => {
+        mutation.mutate({
+            email,
+            password,
+            confirmPassword,
+        });
+        setIsLoading(true);
+        await delay(3000);
+        setIsLoading(false);
     };
 
     return (
         <div className={cx('wrapper')}>
             <div className={cx('box-auth')}>
                 <form action="">
-                    <h2>Login Account</h2>
+                    <h2>Create Account</h2>
                     <div className={cx('input-box')}>
                         <span className={cx('icon')}>
                             <FontAwesomeIcon icon={faEnvelope} />
                         </span>
                         <input placeholder="..." value={email} type="email" onChange={handleOnchangeEmail} />
                         <label>Email</label>
+                        {data?.status === 'Error-email' && <span className={cx('message-err')}>{data?.message}</span>}
+                        {data?.status === 'Error-empty-email' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
                     </div>
                     <div className={cx('input-box')}>
                         <span className={cx('icon')} onClick={() => setIsShowPassword(!isShowPassword)}>
@@ -57,6 +77,9 @@ const SignUp = () => {
                             onChange={handleOnchangePassword}
                         />
                         <label htmlFor="">Password</label>
+                        {data?.status === 'Error-empty-password' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
                     </div>
                     <div className={cx('input-box')}>
                         <span className={cx('icon')} onClick={() => setisShowconfirmPassword(!isShowconfirmPassword)}>
@@ -69,6 +92,12 @@ const SignUp = () => {
                             onChange={handleOnchangeConfirmPassword}
                         />
                         <label htmlFor="">Confirm Password</label>
+                        {data?.status === 'Error-confirmPassword' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
+                        {data?.status === 'Error-empty-confirmPassword' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
                     </div>
                     <div className={cx('remember-forgot')}>
                         <label>
@@ -80,7 +109,7 @@ const SignUp = () => {
                         onClick={handleSignUp}
                         disabled={!email.length || !password.length || confirmPassword.length}
                     >
-                        Register
+                        {isLoading ? 'Loading...' : 'Register'}
                     </div>
                     <div className={cx('link')}>
                         <span>You have an account?</span>

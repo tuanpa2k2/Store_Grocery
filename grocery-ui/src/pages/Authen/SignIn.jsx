@@ -3,6 +3,9 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 
+import * as UserService from '~/services/UserService';
+import { useMutationHooks } from '~/hooks/useMutationHook';
+
 import classNames from 'classnames/bind';
 import styles from './Authen.module.scss';
 
@@ -10,9 +13,14 @@ const cx = classNames.bind(styles);
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isShowPassword, setIsShowPassword] = useState(false);
+
+    const mutation = useMutationHooks((data) => UserService.loginUser(data));
+    const { data } = mutation; // lấy data từ mutation
+    const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     const handleOnchangeEmail = (e) => {
         const email = e.target.value;
@@ -23,8 +31,14 @@ const SignIn = () => {
         setPassword(password);
     };
 
-    const handleLogin = () => {
-        console.log('handleLogin:', email, password);
+    const handleLogin = async () => {
+        mutation.mutate({
+            email,
+            password,
+        });
+        setIsLoading(true);
+        await delay(3000);
+        setIsLoading(false);
     };
 
     return (
@@ -38,6 +52,10 @@ const SignIn = () => {
                         </span>
                         <input value={email} type="email" onChange={handleOnchangeEmail} placeholder="..." />
                         <label>Email</label>
+                        {data?.status === 'Error-email' && <span className={cx('message-err')}>{data?.message}</span>}
+                        {data?.status === 'Error-empty-email' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
                     </div>
                     <div className={cx('input-box')}>
                         <span className={cx('icon')} onClick={() => setIsShowPassword(!isShowPassword)}>
@@ -50,6 +68,12 @@ const SignIn = () => {
                             placeholder="..."
                         />
                         <label htmlFor="">Password</label>
+                        {data?.status === 'Error-password' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
+                        {data?.status === 'Error-empty-password' && (
+                            <span className={cx('message-err')}>{data?.message}</span>
+                        )}
                     </div>
                     <div className={cx('remember-forgot')}>
                         <label>
@@ -63,7 +87,7 @@ const SignIn = () => {
                         onClick={handleLogin}
                         disabled={!email.length || !password.length}
                     >
-                        Login
+                        {isLoading ? 'Loading...' : 'Login'}
                     </div>
                     <div className={cx('link')}>
                         <span>Don't you have an account?</span>
