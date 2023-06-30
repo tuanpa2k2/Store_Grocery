@@ -1,10 +1,13 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import jwt_decode from 'jwt-decode';
 import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
+import { useDispatch } from 'react-redux';
 
 import * as UserService from '~/services/UserService';
 import { useMutationHooks } from '~/hooks/useMutationHook';
+import { updateUser } from '~/redux/slides/useSlide';
 
 import classNames from 'classnames/bind';
 import styles from './Authen.module.scss';
@@ -13,14 +16,35 @@ const cx = classNames.bind(styles);
 
 const SignIn = () => {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [isLoading, setIsLoading] = useState(false);
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [isShowPassword, setIsShowPassword] = useState(false);
 
     const mutation = useMutationHooks((data) => UserService.loginUser(data));
-    const { data } = mutation; // lấy data từ mutation
+    const { data, isSuccess } = mutation; // lấy data từ mutation
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/');
+            localStorage.setItem('access_token', data?.access_token);
+
+            if (data?.access_token) {
+                const decoded = jwt_decode(data?.access_token);
+                console.log('decoded:', decoded);
+                if (decoded?.id) {
+                    handleGetDetailsUser(decoded?.id, data?.access_token);
+                }
+            }
+        }
+    }, [isSuccess]);
+
+    const handleGetDetailsUser = async (id, token) => {
+        const res = await UserService.getDetailsUser(id, token);
+        dispatch(updateUser({ ...res?.data, access_token: token }));
+    };
 
     const handleOnchangeEmail = (e) => {
         const email = e.target.value;

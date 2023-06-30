@@ -1,16 +1,18 @@
 const express = require("express");
 const dotenv = require("dotenv");
 const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
 const mongoose = require("mongoose");
-const cors = require('cors')
+const cors = require("cors");
 const routes = require("./routes");
 dotenv.config();
 
 const app = express();
 const port = process.env.PORT || 3001;
 
-app.use(cors())
+app.use(cors());
 app.use(bodyParser.json());
+app.use(cookieParser());
 
 routes(app);
 
@@ -24,5 +26,5 @@ mongoose
   });
 
 app.listen(port, () => {
-  console.log("Server is running in port: ", + port);
+  console.log("Server is running in port: ", +port);
 });

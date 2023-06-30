@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -23,8 +23,14 @@ const SignUp = () => {
     const [isShowconfirmPassword, setisShowconfirmPassword] = useState(false);
 
     const mutation = useMutationHooks((data) => UserService.createUser(data));
-    const { data } = mutation;
+    const { data, isSuccess } = mutation;
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
+
+    useEffect(() => {
+        if (isSuccess) {
+            navigate('/login');
+        }
+    }, [isSuccess]);
 
     const handleOnchangeEmail = (e) => {
         const emailed = e.target.value;

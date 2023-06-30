@@ -1,5 +1,6 @@
 // import { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useSelector } from 'react-redux';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faMagnifyingGlass, faCartShopping, faEllipsisVertical } from '@fortawesome/free-solid-svg-icons';
 
@@ -12,6 +13,7 @@ const Header = () => {
     // const [scrolled, setScrolled] = useState(false);
     // console.log(scrolled);
     const navigate = useNavigate();
+    const user = useSelector((state) => state.user);
 
     // const handleScrolled = () => {
     //     const offset = window.scrollY;
@@ -37,9 +39,15 @@ const Header = () => {
                     </button>
                 </div>
                 <div className={cx('right')}>
-                    <div className={cx('access-account')} onClick={() => navigate('/login')}>
-                        tuanpa2k2@gmail.com
-                    </div>
+                    {user?.name ? (
+                        <div className={cx('access-account')} onClick={() => navigate('/login')}>
+                            {user.name}
+                        </div>
+                    ) : (
+                        <div className={cx('access-account')} onClick={() => navigate('/login')}>
+                            Login
+                        </div>
+                    )}
                     <div className={cx('cart-icon')}>
                         <FontAwesomeIcon icon={faCartShopping} />
                         <span>5</span>
