@@ -27,9 +27,10 @@ const SignUp = () => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     useEffect(() => {
-        if (isSuccess) {
+        if (data?.status === 'OK' && isSuccess) {
             navigate('/login');
         }
+        return;
     }, [isSuccess]);
 
     const handleOnchangeEmail = (e) => {
@@ -67,7 +68,7 @@ const SignUp = () => {
                         </span>
                         <input placeholder="..." value={email} type="email" onChange={handleOnchangeEmail} />
                         <label>Email</label>
-                        {data?.status === 'Error-email' && <span className={cx('message-err')}>{data?.message}</span>}
+                        {data?.status === 'Error' && <span className={cx('message-err')}>{data?.message}</span>}
                         {data?.status === 'Error-empty-email' && (
                             <span className={cx('message-err')}>{data?.message}</span>
                         )}

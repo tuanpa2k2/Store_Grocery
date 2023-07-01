@@ -27,13 +27,12 @@ const SignIn = () => {
     const delay = (ms) => new Promise((resolve) => setTimeout(resolve, ms));
 
     useEffect(() => {
-        if (isSuccess) {
+        if (data?.status === 'OK' && isSuccess) {
             navigate('/');
-            localStorage.setItem('access_token', data?.access_token);
+            localStorage.setItem('access_token', JSON.stringify(data?.access_token));
 
             if (data?.access_token) {
                 const decoded = jwt_decode(data?.access_token);
-                console.log('decoded:', decoded);
                 if (decoded?.id) {
                     handleGetDetailsUser(decoded?.id, data?.access_token);
                 }

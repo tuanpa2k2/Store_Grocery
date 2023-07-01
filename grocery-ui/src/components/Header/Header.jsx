@@ -10,21 +10,8 @@ import styles from './Header.module.scss';
 const cx = classNames.bind(styles);
 
 const Header = () => {
-    // const [scrolled, setScrolled] = useState(false);
-    // console.log(scrolled);
     const navigate = useNavigate();
     const user = useSelector((state) => state.user);
-
-    // const handleScrolled = () => {
-    //     const offset = window.scrollY;
-    //     if (offset > 200) {
-    //         setScrolled(true);
-    //     } else setScrolled(false);
-    // };
-
-    // useEffect(() => {
-    //     window.addEventListener('scroll', handleScrolled);
-    // }, []);
 
     return (
         <header className={cx('wrapper')}>
@@ -45,7 +32,7 @@ const Header = () => {
                         </div>
                     ) : (
                         <div className={cx('access-account')} onClick={() => navigate('/login')}>
-                            Login
+                            Login / Register
                         </div>
                     )}
                     <div className={cx('cart-icon')}>
