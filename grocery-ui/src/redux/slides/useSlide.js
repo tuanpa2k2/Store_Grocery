@@ -16,10 +16,17 @@ export const userSlide = createSlice({
             state.email = email;
             state.access_token = access_token;
         },
+
+        // reset khi log-out
+        resetUser: (state) => {
+            state.name = '';
+            state.email = '';
+            state.access_token = '';
+        },
     },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateUser } = userSlide.actions;
+export const { updateUser, resetUser } = userSlide.actions;
 
 export default userSlide.reducer;

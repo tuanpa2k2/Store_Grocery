@@ -2,19 +2,19 @@ const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 dotenv.config();
 
-const genneralAccessToken = async (payload) => {
+const genneralAccessToken = (payload) => {
   const access_token = jwt.sign(
     {
       ...payload,
     },
     process.env.ACCESS_TOKEN,
-    { expiresIn: "60s" }
+    { expiresIn: "30s" }
   );
 
   return access_token;
 };
 
-const genneralRefreshToken = async (payload) => {
+const genneralRefreshToken = (payload) => {
   const refresh_token = jwt.sign(
     {
       ...payload,
@@ -26,8 +26,8 @@ const genneralRefreshToken = async (payload) => {
   return refresh_token;
 };
 
-const refreshTokenService = async (token) => {
-  return new Promise(async (resolve, reject) => {
+const refreshTokenService = (token) => {
+  return new Promise((resolve, reject) => {
     try {
       jwt.verify(token, process.env.REFRESH_TOKEN, async (err, user) => {
         if (err) {

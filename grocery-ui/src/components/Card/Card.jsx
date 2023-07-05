@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import prop from '~/assets/images/product.jpg';
 
 import classNames from 'classnames/bind';
@@ -6,8 +8,17 @@ import styles from './Card.module.scss';
 const cx = classNames.bind(styles);
 
 const Card = () => {
+    useEffect(() => {
+        AOS.init();
+    }, []);
+
     return (
-        <div className={cx('product-cart')}>
+        <div
+            data-aos="fade-up"
+            data-aos-anchor-placement="bottom-bottom"
+            data-aos-duration="2000"
+            className={cx('product-cart')}
+        >
             <div className={cx('thumbnail')}>
                 <img src={prop} alt="" />
             </div>

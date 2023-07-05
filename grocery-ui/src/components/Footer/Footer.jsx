@@ -1,4 +1,6 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faLocationArrow, faPhoneAlt, faEnvelope } from '@fortawesome/free-solid-svg-icons';
 import classNames from 'classnames/bind';
@@ -7,10 +9,19 @@ import styles from './Footer.module.scss';
 const cx = classNames.bind(styles);
 
 const Footer = () => {
+    useEffect(() => {
+        AOS.init();
+    }, []);
+
     return (
         <div className={cx('wrapper')}>
             <div className={cx('footer-content')}>
-                <div className={cx('col')}>
+                <div
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                    data-aos-duration="1000"
+                    className={cx('col')}
+                >
                     <div className={cx('title')}>About</div>
                     <div className={cx('text')}>
                         Lorem ipsum dolor sit, amet consectetur adipisicing elit. Minus beatae nesciunt maiores
@@ -18,7 +29,12 @@ const Footer = () => {
                         amet temporibus in iusto eligendi expedita.
                     </div>
                 </div>
-                <div className={cx('col')}>
+                <div
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                    data-aos-duration="1000"
+                    className={cx('col')}
+                >
                     <div className={cx('title')}>Contact</div>
                     <div className={cx('c-item')}>
                         <FontAwesomeIcon icon={faLocationArrow} />
@@ -36,7 +52,12 @@ const Footer = () => {
                         <div className={cx('text')}>Email: tuanpa2k2@gmail.com</div>
                     </div>
                 </div>
-                <div className={cx('col')}>
+                <div
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                    data-aos-duration="1000"
+                    className={cx('col')}
+                >
                     <div className={cx('title')}>Categories</div>
                     <span className={cx('text')}>Books English</span>
                     <span className={cx('text')}>Máy tính</span>
@@ -45,7 +66,12 @@ const Footer = () => {
                     <span className={cx('text')}>Giày dép</span>
                     <span className={cx('text')}>Quần áo</span>
                 </div>
-                <div className={cx('col')}>
+                <div
+                    data-aos="fade-up"
+                    data-aos-anchor-placement="bottom-bottom"
+                    data-aos-duration="1000"
+                    className={cx('col')}
+                >
                     <div className={cx('title')}>Page</div>
                     <span className={cx('text')}>home</span>
                     <span className={cx('text')}>about</span>

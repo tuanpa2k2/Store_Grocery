@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faEnvelope, faLock, faUnlock } from '@fortawesome/free-solid-svg-icons';
 import { useDispatch } from 'react-redux';
+import { ToastContainer, toast } from 'react-toastify';
 
 import * as UserService from '~/services/UserService';
 import { useMutationHooks } from '~/hooks/useMutationHook';
@@ -11,6 +12,7 @@ import { updateUser } from '~/redux/slides/useSlide';
 
 import classNames from 'classnames/bind';
 import styles from './Authen.module.scss';
+import 'react-toastify/dist/ReactToastify.css';
 
 const cx = classNames.bind(styles);
 
@@ -28,6 +30,16 @@ const SignIn = () => {
 
     useEffect(() => {
         if (data?.status === 'OK' && isSuccess) {
+            toast.success('Đăng nhập thành công', {
+                position: 'top-right',
+                autoClose: 2000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+                theme: 'colored',
+            });
             navigate('/');
             localStorage.setItem('access_token', JSON.stringify(data?.access_token));
 
@@ -59,6 +71,7 @@ const SignIn = () => {
             email,
             password,
         });
+
         setIsLoading(true);
         await delay(3000);
         setIsLoading(false);
@@ -118,6 +131,18 @@ const SignIn = () => {
                     </div>
                 </form>
             </div>
+            <ToastContainer
+                position="top-right"
+                autoClose={5000}
+                hideProgressBar={false}
+                newestOnTop={false}
+                closeOnClick
+                rtl={false}
+                pauseOnFocusLoss
+                draggable
+                pauseOnHover
+                theme="colored"
+            />
         </div>
     );
 };

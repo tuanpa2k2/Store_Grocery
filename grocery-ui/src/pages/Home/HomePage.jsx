@@ -31,6 +31,18 @@ const HomePage = () => {
                 <Card />
                 <Card />
                 <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
+                <Card />
             </div>
             <div className={cx('btn')}>
                 <button className={cx('btn-xemthem')}>Xem Thêm</button>
