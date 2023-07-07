@@ -53,6 +53,7 @@ const Header = () => {
                             render={(attrs) => (
                                 <div className={cx('menu-info')} tabIndex="-1" {...attrs}>
                                     <span>Thông tin cá nhân</span>
+                                    <span>cách sử dụng</span>
                                     <span onClick={handleLogout}>đăng xuất</span>
                                 </div>
                             )}
@@ -66,10 +67,19 @@ const Header = () => {
                             Login / Register
                         </div>
                     )}
-                    <div className={cx('cart-icon')}>
-                        <FontAwesomeIcon icon={faCartShopping} />
-                        <span>5</span>
-                    </div>
+                    <Tippy
+                        interactive
+                        render={(attrs) => (
+                            <div className={cx('cart-popper')} tabIndex="-1" {...attrs}>
+                                <span>giỏ hàng</span>
+                            </div>
+                        )}
+                    >
+                        <div className={cx('cart-icon')}>
+                            <FontAwesomeIcon icon={faCartShopping} />
+                            <span>5</span>
+                        </div>
+                    </Tippy>
                     {/* <div className={cx('more-btn')}>
                         <FontAwesomeIcon icon={faEllipsisVertical} />
                     </div> */}

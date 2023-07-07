@@ -1,41 +1,46 @@
 .wrapper {
     .text-categories,
-    .checkbox-place,
-    .text-price {
+    .checkbox-place {
         padding-bottom: 6px;
         display: flex;
         flex-direction: column;
-        gap: 6px;
 
         .text-label {
-            padding-top: 5px;
+            padding: 5px 0 0 10px;
             color: var(--text-color);
             text-transform: uppercase;
             font-size: 18px;
             font-weight: 600;
+            border-bottom: 1px solid black;
         }
+    }
 
-        &::after {
-            content: '';
-            position: absolute;
-            margin-top: 30px;
-            width: 200px;
-            height: 1px;
-            background-color: #a3a3a3;
+    .text-price {
+        gap: 6px;
+        display: flex;
+        flex-direction: column;
+
+        .text-label {
+            padding: 5px 0 0 10px;
+            color: var(--text-color);
+            text-transform: uppercase;
+            font-size: 18px;
+            font-weight: 600;
+            border-bottom: 1px solid black;
         }
     }
 
     // CSS nằm trong function renderContent()
     // case 'text'
     .text-value {
-        padding-left: 10px;
+        padding: 4px 0 4px 15px;
         color: rgb(0, 0, 0);
         text-transform: capitalize;
+        font-size: 18px;
 
         &:hover {
+            background-color: rgb(236, 236, 236);
             cursor: pointer;
-            text-decoration: underline;
-            color: blue;
         }
     }
 
@@ -43,22 +48,31 @@
     .form-group-checkbox {
         display: flex;
         flex-direction: row;
+        padding-left: 15px;
+
+        .text-value-checkbox {
+            padding: 4px 0 4px 15px;
+            color: rgb(0, 0, 0);
+            text-transform: capitalize;
+            font-size: 18px;
+        }
+
+        &:hover {
+            background-color: rgb(236, 236, 236);
+            cursor: pointer;
+        }
     }
 
     // case 'price'
     .form-group-price {
-        padding: 10px;
-        width: fit-content;
-        display: flex;
-        align-items: center;
-        height: 30px;
+        padding: 5px 0 5px 15px;
         font-size: 16px;
         border-radius: 15px;
         background-color: #ffffff;
 
         &:hover {
             cursor: pointer;
-            background-color: rgb(151, 151, 151);
+            background-color: #d5d5d5;
         }
     }
 }
